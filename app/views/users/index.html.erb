@@ -1,0 +1,29 @@
+<!--ここは自分や他の投稿者のShowを載せる-->
+<div class="container px-5 px-sm-0">
+  <div class="row">
+  <%= render 'books/info', book: @book %>
+  <!--bootstrapの装飾は、部分プレートの入れ方を注意してあげると上手くいく。-->
+    <div class="col-md-8 offset-md-1">
+    <h2>Users</h2>
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <% @users.each do |user| %>
+        <td><%= image_tag @user.get_profile_image(100,100) %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to "show", user_path(@user) %></td>
+        <!--.idによってそれぞれのuserを表示するので引数が必要、コントローラーで(params[:id])にしてるから。-->
+        <% end %>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
