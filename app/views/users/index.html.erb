@@ -18,7 +18,7 @@
         <% @users.each do |user| %>
         <td><%= image_tag @user.get_profile_image(100,100) %></td>
         <td><%= user.name %></td>
-        <td><%= link_to "show", user_path(@user) %></td>
+        <td><%= link_to "show", books_path(@user) %></td>
         <!--.idによってそれぞれのuserを表示するので引数が必要、コントローラーで(params[:id])にしてるから。-->
         <% end %>
         </tr>

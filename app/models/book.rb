@@ -11,5 +11,8 @@ belongs_to :user
       'no_image.jpg'
     end
   end
+  
+  validates :title, presence: true
+  validates :body, presence: true
 
 end
