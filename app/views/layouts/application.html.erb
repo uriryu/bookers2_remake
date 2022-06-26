@@ -35,8 +35,8 @@
                 <%= link_to "Books", books_path %>
               </li>
               <li class="nav-link text-light">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                <i class="fas fa-sign-out-alt"></i>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
               </li>
             <% else %>
               <li class="nav-link text-light">
@@ -64,7 +64,9 @@
 
 
     <main>
-       <%= yield %>
+      <%= render 'layouts/flash' %>
+      <p id="notice"></p>
+      <%= yield %>
     </main>
 
     <footer>

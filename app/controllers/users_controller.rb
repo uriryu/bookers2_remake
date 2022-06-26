@@ -1,31 +1,29 @@
 class UsersController < ApplicationController
+   before_action :correct_user, only: [:edit, :update]
   def show
-    @book = Book.new
-    @books = Book.all
     @users = User.all
     @user = User.find(params[:id])
+    # :idには文字列や数字なんでも入る。
+    @book = @user.books
+    @books = Book.new
   end
 
   def edit
     @user = User.find(params[:id])
-    if @user == current_user
-      render "edit"
-    else
-      redirect_to edit_user_path(@user)
-    end
   end
 
   def index
-    @books = Book.all
+    @books = Book.new
     @user = current_user
     @users = User.all
+    @book = Book.all
   end
 
 
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path
+      redirect_to user_path, notice: 'You have updated user successfully.'
     else
       render :edit
     end
@@ -37,4 +35,11 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :introduction, :profile_image)
   end
 
+  def correct_user
+    @user = User.find(params[:id])
+     unless @user == current_user
+    redirect_to(books_path) 
+     end
+  end
+  
 end

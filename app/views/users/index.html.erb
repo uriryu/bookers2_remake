@@ -1,7 +1,7 @@
-<!--ここは自分や他の投稿者のShowを載せる-->
 <div class="container px-5 px-sm-0">
+  
   <div class="row">
-  <%= render 'books/info', book: @book %>
+  <%= render 'books/info', books: @books %>
   <!--bootstrapの装飾は、部分プレートの入れ方を注意してあげると上手くいく。-->
     <div class="col-md-8 offset-md-1">
     <h2>Users</h2>
@@ -14,14 +14,14 @@
         </tr>
       </thead>
       <tbody>
+      <% @users.each do |user| %>
       <tr>
-        <% @users.each do |user| %>
-        <td><%= image_tag @user.get_profile_image(100,100) %></td>
+        <td><%= image_tag user.get_profile_image(100,100) %></td>
         <td><%= user.name %></td>
-        <td><%= link_to "show", books_path(@user) %></td>
+        <td><%= link_to "show", user_path(user.id) %></td>
         <!--.idによってそれぞれのuserを表示するので引数が必要、コントローラーで(params[:id])にしてるから。-->
-        <% end %>
-        </tr>
+      </tr>
+      <% end %>
       </tbody>
     </table>
     </div>

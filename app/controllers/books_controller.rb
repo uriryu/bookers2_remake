@@ -2,23 +2,25 @@ class BooksController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def new
+    @book = Book.new
   end
 
   def index
-    @book = Book.new
-    @books = Book.all
+    @books = Book.new
+    @book = Book.all
     @user = current_user
+    @users = User.all
     # 現在のuser情報を変数に入れる。nameerrorは変数の名前が違うという意味。
     # current_user.id のidはurlの/8などの数字がある時.idが必要になる。
   end
 
   def create
     @user = current_user
-    @books = Book.all
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
-    if @book.save
-    redirect_to book_path(current_user)
+    @book = Book.all
+    @books = Book.new(book_params)
+    @books.user_id = current_user.id
+    if @books.save
+      redirect_to book_path(@books.id), notice: 'You have created book successfully.'
     else
       render :index
     end
@@ -31,14 +33,24 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.new
-    @books = Book.all
+    @book = Book.find(params[:id])
+    @books = Book.new
     @users = User.all
-    @user = current_user
+    @user = @book.user
+    # ここを変えないとログインしているユーザー画像が表示されてしまう。
   end
 
   def edit
     @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      redirect_to book_path, notice: 'You have updated book successfully.'
+    else
+      render :edit
+    end
   end
 
   private

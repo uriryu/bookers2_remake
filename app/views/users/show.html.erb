@@ -1,7 +1,6 @@
-<!--登録者のユーザーの詳細　detailではない-->
 <div class="container px-5 px-sm-0">
   <div class="row">
-  <%= render 'books/info', book: @book %>
+  <%= render 'books/info', books: @books %>
   <div class="col-md-8 offset-md-1">
     <h2>Books</h2>
     <table class="table table-hover table-inverse">
@@ -13,14 +12,15 @@
         </tr>
       </thead>
       <tbody>
-      <% @books.each do |book| %>
+      <% @book.each do |book| %>
         <tr>
-          <td><%= image_tag @user.get_profile_image(100,100) %></td>
+          <td><%= image_tag book.user.get_profile_image(100,100) %></td>
           <td>
-            <%= link_to book.title, book_path(@user) %>
+            <%= link_to book.title, book_path(book.id) %>
           </td>
           <td><%= book.body %></td>
         </tr>
+        <!--アンダースコアは変数の単語ごとに大文字にして分けるイメージ。名前の一部として扱われる。.はブックの情報の中のカラムを取り出せる-->
         <% end %>
       </tbody>
     </table>
