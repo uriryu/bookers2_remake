@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     @books = Book.new
     @book = Book.all
     @user = current_user
-    @users = User.all
+
     # 現在のuser情報を変数に入れる。nameerrorは変数の名前が違うという意味。
     # current_user.id のidはurlの/8などの数字がある時.idが必要になる。
   end
@@ -35,7 +35,6 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @books = Book.new
-    @users = User.all
     @user = @book.user
     # ここを変えないとログインしているユーザー画像が表示されてしまう。
   end

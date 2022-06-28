@@ -8,7 +8,9 @@
   </ul>
   <% end %>
   <div class="row">
-    <%= render 'info', books: @books %>
+    <%= render 'info', books: @books, user: @user %>
+    <!--ローカル変数は１つじゃなくてもよい、戻し値とコントローラーを変えれば部分テンプレートのコード自体はローカル変数に代入されるだけなので変える必要がない。-->
+    <!--部分テンプレートのコントローラは部分テンプレートを表示したいページのコントローラに記述。-->
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table class="table table-hover table-inverse">

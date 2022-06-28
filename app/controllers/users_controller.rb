@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
    before_action :correct_user, only: [:edit, :update]
   def show
-    @users = User.all
     @user = User.find(params[:id])
     # :idには文字列や数字なんでも入る。
     @book = @user.books
@@ -16,7 +15,6 @@ class UsersController < ApplicationController
     @books = Book.new
     @user = current_user
     @users = User.all
-    @book = Book.all
   end
 
 
@@ -38,8 +36,8 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
      unless @user == current_user
-    redirect_to(current_user) 
+    redirect_to(current_user)
      end
   end
-  
+
 end
